@@ -25,13 +25,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', indexRouter);
+app['get']('/', indexRouter);
 app.use('/users', usersRouter);
 
-app.get('/new-entry', function (request, response) {
+app['get']('/new-entry', function (request, response) {
     response.render('new-entry');
 });
-app.post('/new-entry',function (request, response) {
+app['post']('/new-entry',function (request, response) {
 
     if (!request.body.title || !request.body.title) {
         response.status(401).send("Entries must have a title and a body.");
