@@ -25,25 +25,26 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.get('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/new-entry',function (request, response) {
-  if (request.method === 'GET') {
+
+app.get('/new-entry', function (request, response) {
     response.render('new-entry');
-  } else {
-      if (!request.body.title || !request.body.title) {
-          response.status(401).send("Entries must have a title and a body.");
-          return;
-      }
+});
+app.post('/new-entry',function (request, response) {
 
-      entries.push({
-          title : request.body.title,
-          body : request.body.body,
-          published : new Date()
-      });
+    if (!request.body.title || !request.body.title) {
+        response.status(401).send("Entries must have a title and a body.");
+        return;
+    }
 
-      response.redirect('/');
-  }
+    entries.push({
+        title: request.body.title,
+        body: request.body.body,
+        published: new Date()
+    });
+
+    response.redirect('/');
 });
 
 app.use(function (request, response) {
