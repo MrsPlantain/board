@@ -1,0 +1,25 @@
+<% include header.ejs%>
+<table class="table">
+    <thead>
+        <tr>
+            <th>UserName</th>
+            <th>UserAccount</th>
+            <th>CreateTime</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    <% if (users.length) { %>
+    <% users.forEach(function (entry) { %>
+        <tr>
+            <td><%= entry.UserName%></td>
+            <td><%= entry.UserAccount%></td>
+            <td><%= entry.CreateTime%></td>
+        </tr>
+    <% })%>
+    <% } %>
+    </tbody>
+</table>
+
+
+<% include footer.ejs%>
